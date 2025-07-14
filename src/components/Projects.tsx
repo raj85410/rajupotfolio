@@ -19,7 +19,8 @@ const Projects = () => {
       tech: ["Python", "Streamlit", "Pandas"],
       description: "Analyzed 10K+ travel data points for demand prediction.",
       image: "https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg?auto=compress&cs=tinysrgb&w=800",
-      category: "Data Analysis"
+      category: "Data Analysis",
+      link: "https://travel-rosy-mu-48.vercel.app/"
     },
     {
       id: 3,
@@ -110,9 +111,21 @@ const Projects = () => {
                     <button className="p-3 border border-white/30 text-white hover:bg-white/10 transition-colors duration-300">
                       <Github className="w-5 h-5" />
                     </button>
-                    <button className="p-3 border border-white/30 text-white hover:bg-white/10 transition-colors duration-300">
-                      <ExternalLink className="w-5 h-5" />
-                    </button>
+                    {project.link ? (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 border border-white/30 text-white hover:bg-white/10 transition-colors duration-300 flex items-center justify-center"
+                        aria-label="External Link"
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                      </a>
+                    ) : (
+                      <button className="p-3 border border-white/30 text-white hover:bg-white/10 transition-colors duration-300" disabled>
+                        <ExternalLink className="w-5 h-5" />
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
