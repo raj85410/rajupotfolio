@@ -203,7 +203,7 @@ const Contact = () => {
                 rel="noopener noreferrer"
                 className="p-4 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors duration-300 flex items-center justify-center"
                 aria-label="Discord"
-              >
+                      >
                 <FaDiscord className="w-6 h-6" />
               </a>
               <a
