@@ -9,6 +9,8 @@ const Contact = () => {
     email: '',
     message: ''
   });
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>("idle");
+  const [statusMsg, setStatusMsg] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -17,9 +19,29 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setStatus('loading');
+    setStatusMsg('Sending...');
+    try {
+      const res = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setStatus('success');
+        setStatusMsg('Message sent successfully!');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setStatus('error');
+        setStatusMsg(data.error || 'Failed to send message.');
+      }
+    } catch (err) {
+      setStatus('error');
+      setStatusMsg('Failed to send message.');
+    }
   };
 
   const awsRegions = [
@@ -98,10 +120,16 @@ const Contact = () => {
               <button
                 type="submit"
                 className="w-full px-8 py-4 border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-500 font-light tracking-[0.15em] text-sm flex items-center justify-center space-x-3"
+                disabled={status === 'loading'}
               >
                 <Send className="w-5 h-5" />
-                <span>SEND MESSAGE</span>
+                <span>{status === 'loading' ? 'SENDING...' : 'SEND MESSAGE'}</span>
               </button>
+              {status !== 'idle' && (
+                <div className={`text-center mt-4 text-sm ${status === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+                  {statusMsg}
+                </div>
+              )}
             </form>
           </div>
 
