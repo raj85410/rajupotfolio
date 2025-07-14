@@ -147,49 +147,6 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-
-            {/* AWS Region Map */}
-            <div className="bg-white dark:bg-slate-900 p-8 border border-gray-200 dark:border-slate-700">
-              <h4 className="text-lg font-black text-gray-900 dark:text-white mb-6 tracking-[0.1em]">
-                AWS REGIONS EXPERIENCE
-              </h4>
-              <div className="relative w-full h-48 bg-gray-100 dark:bg-slate-800 overflow-hidden">
-                <svg viewBox="0 0 120 80" className="w-full h-full">
-                  {/* Simplified world map outline */}
-                  <path
-                    d="M10 40 Q30 35 50 40 Q70 45 90 40 Q110 35 120 40 L120 60 Q100 65 80 60 Q60 55 40 60 Q20 65 10 60 Z"
-                    fill="currentColor"
-                    className="text-gray-300 dark:text-slate-600"
-                  />
-                  
-                  {/* AWS Region dots */}
-                  {awsRegions.map((region, index) => (
-                    <g key={index}>
-                      <circle
-                        cx={region.x}
-                        cy={region.y}
-                        r="2.5"
-                        fill="#FF9900"
-                        className="animate-pulse"
-                      />
-                      <text
-                        x={region.x}
-                        y={region.y - 6}
-                        fontSize="3.5"
-                        fill="currentColor"
-                        textAnchor="middle"
-                        className="text-gray-600 dark:text-gray-400 text-xs font-light"
-                      >
-                        {region.name}
-                      </text>
-                    </g>
-                  ))}
-                </svg>
-              </div>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400 mt-6 leading-relaxed">
-                Experienced with AWS cloud infrastructure across multiple regions
-              </p>
-            </div>
           </div>
         </div>
       </div>
