@@ -11,7 +11,8 @@ const Projects = () => {
       tech: ["Docker", "Jenkins", "Python", "Kubernetes"],
       description: "Reduced deployment time by 70% with Kubernetes integration.",
       image: "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=800",
-      category: "DevOps"
+      category: "DevOps",
+      github: "https://github.com/raj85410/devopsprojact1"
     },
     {
       id: 2,
@@ -108,10 +109,18 @@ const Projects = () => {
                   </div>
                   
                   <div className="flex space-x-4">
-                    <button className="p-3 border border-white/30 text-white hover:bg-white/10 transition-colors duration-300">
-                      <Github className="w-5 h-5" />
-                    </button>
-                    {project.link ? (
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 border border-white/30 text-white hover:bg-white/10 transition-colors duration-300 flex items-center justify-center"
+                        aria-label="GitHub"
+                      >
+                        <Github className="w-5 h-5" />
+                      </a>
+                    )}
+                    {project.link && (
                       <a
                         href={project.link}
                         target="_blank"
@@ -121,10 +130,6 @@ const Projects = () => {
                       >
                         <ExternalLink className="w-5 h-5" />
                       </a>
-                    ) : (
-                      <button className="p-3 border border-white/30 text-white hover:bg-white/10 transition-colors duration-300" disabled>
-                        <ExternalLink className="w-5 h-5" />
-                      </button>
                     )}
                   </div>
                 </div>
