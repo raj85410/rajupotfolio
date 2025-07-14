@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
+// Add icon imports for social links
+import { FaGithub, FaLinkedin, FaDiscord, FaInstagram } from 'react-icons/fa';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -146,6 +148,45 @@ const Contact = () => {
                   <p className="text-lg font-light text-gray-900 dark:text-white">Jaipur, India</p>
                 </div>
               </div>
+            </div>
+            {/* Social Links Row */}
+            <div className="flex gap-6 mt-8">
+              <a
+                href="https://github.com/raj85410"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-4 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors duration-300 flex items-center justify-center"
+                aria-label="GitHub"
+              >
+                <FaGithub className="w-6 h-6" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/raju-jain-0a5466280/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-4 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors duration-300 flex items-center justify-center"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin className="w-6 h-6" />
+              </a>
+              <a
+                href="https://www.discode.com/raj.jain"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-4 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors duration-300 flex items-center justify-center"
+                aria-label="Discord"
+              >
+                <FaDiscord className="w-6 h-6" />
+              </a>
+              <a
+                href="https://www.instagram.com/raj._jain_007/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-4 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors duration-300 flex items-center justify-center"
+                aria-label="Instagram"
+              >
+                <FaInstagram className="w-6 h-6" />
+              </a>
             </div>
           </div>
         </div>
