@@ -61,6 +61,35 @@ const About = () => {
               ))}
             </div>
           </div>
+          {/* Soft Skills Section */}
+          <div className="mt-16">
+            <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-8 tracking-[0.1em]">
+              SOFT SKILLS
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                'Communication Skills',
+                'Problem Solving',
+                'Time Management',
+                'Leadership',
+                'Adaptability',
+                'Critical Thinking',
+                'Creative Innovation',
+                'Emotional Intelligence',
+                'Decision Making',
+                'Strategic Planning'
+              ].map((skill, index) => (
+                <div 
+                  key={index}
+                  className="group p-6 bg-white dark:bg-slate-900 hover:bg-orange-50 dark:hover:bg-slate-700 transition-all duration-300 cursor-pointer"
+                >
+                  <span className="text-gray-800 dark:text-gray-200 font-light group-hover:text-orange-500 transition-colors duration-300">
+                    {skill}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
