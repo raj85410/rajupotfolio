@@ -7,7 +7,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
+    address: '',
     message: ''
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>("idle");
@@ -34,7 +34,7 @@ const Contact = () => {
       if (res.ok) {
         setStatus('success');
         setStatusMsg('Message sent successfully!');
-        setFormData({ name: '', email: '', subject: '', message: '' });
+        setFormData({ name: '', email: '', address: '', message: '' });
       } else {
         setStatus('error');
         setStatusMsg('Failed to send message.');
@@ -45,105 +45,125 @@ const Contact = () => {
     }
   };
 
-  const awsRegions = [
-    { name: 'Mumbai', x: 75, y: 30 },
-    { name: 'Singapore', x: 85, y: 40 },
-    { name: 'Tokyo', x: 95, y: 25 },
-    { name: 'Sydney', x: 100, y: 65 },
-    { name: 'Frankfurt', x: 45, y: 20 },
-    { name: 'London', x: 40, y: 18 },
-    { name: 'N. Virginia', x: 25, y: 25 },
-    { name: 'Oregon', x: 15, y: 22 },
-  ];
-
   return (
-    <section id="contact" className="min-h-screen bg-gray-50 dark:bg-slate-800 py-24">
-      <div className="max-w-2xl mx-auto px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-6xl md:text-7xl font-black text-gray-900 dark:text-white mb-8 tracking-[0.1em]">
-            CONTACT
-          </h2>
-          <div className="w-24 h-px bg-orange-500 mx-auto mb-8"></div>
-          <p className="text-lg font-light text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Ready to discuss your next project? Let's connect and build something amazing together.
-          </p>
-        </div>
-        {/* Contact Info */}
-        <div className="mb-8 flex flex-col items-center gap-2">
-          <div className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
-            <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5.75A2.75 2.75 0 015.75 3h12.5A2.75 2.75 0 0121 5.75v12.5A2.75 2.75 0 0118.25 21H5.75A2.75 2.75 0 013 18.25V5.75z" /></svg>
-            <span>+91-8511734001</span>
-          </div>
-          <div className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
-            <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16 12H8m8 0a4 4 0 11-8 0 4 4 0 018 0zm0 0v1a4 4 0 01-8 0v-1" /></svg>
-            <span>rajcallbrite@gmail.com</span>
-          </div>
-        </div>
-        {/* Contact Form */}
-        <form onSubmit={handleSubmit} className="space-y-6 bg-white dark:bg-slate-900 p-8 rounded-lg shadow-lg">
-          <div>
-            <label htmlFor="name" className="block text-sm font-light text-gray-700 dark:text-gray-300 mb-2">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-transparent text-gray-900 dark:text-white focus:border-orange-500 focus:ring-0 transition-colors outline-none font-light rounded"
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="block text-sm font-light text-gray-700 dark:text-gray-300 mb-2">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-transparent text-gray-900 dark:text-white focus:border-orange-500 focus:ring-0 transition-colors outline-none font-light rounded"
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="subject" className="block text-sm font-light text-gray-700 dark:text-gray-300 mb-2">Subject</label>
-            <input
-              type="text"
-              id="subject"
-              name="subject"
-              value={formData.subject}
-              onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-transparent text-gray-900 dark:text-white focus:border-orange-500 focus:ring-0 transition-colors outline-none font-light rounded"
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="message" className="block text-sm font-light text-gray-700 dark:text-gray-300 mb-2">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              rows={5}
-              value={formData.message}
-              onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-transparent text-gray-900 dark:text-white focus:border-orange-500 focus:ring-0 transition-colors outline-none font-light rounded resize-none"
-              required
-            ></textarea>
-          </div>
-          <button
-            type="submit"
-            className="w-full px-8 py-4 border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-500 font-light tracking-[0.15em] text-sm flex items-center justify-center space-x-3 rounded"
-            disabled={status === 'loading'}
-          >
-            <span>{status === 'loading' ? 'SENDING...' : 'SEND MESSAGE'}</span>
-          </button>
-          {status !== 'idle' && (
-            <div className={`text-center mt-2 text-sm ${status === 'success' ? 'text-green-600' : 'text-red-600'}`}>
-              {statusMsg}
+    <section id="contact" className="min-h-screen bg-black bg-opacity-80 py-24 text-white" style={{backgroundImage: 'url(/asset/image22222.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
+      <div className="max-w-5xl mx-auto px-4 md:px-8">
+        <div className="grid md:grid-cols-2 gap-12 bg-black bg-opacity-70 rounded-lg shadow-lg p-8">
+          {/* Left: Contact Info */}
+          <div className="flex flex-col gap-10 justify-center">
+            <div>
+              <h2 className="text-4xl font-bold mb-6 tracking-wide">CONTACT US</h2>
+              <p className="text-xs text-gray-400 mb-8">Images from Freepik</p>
             </div>
-          )}
-        </form>
+            <div className="flex items-start gap-4 mb-4">
+              <span className="mt-1 text-yellow-400">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5.75A2.75 2.75 0 015.75 3h12.5A2.75 2.75 0 0121 5.75v12.5A2.75 2.75 0 0118.25 21H5.75A2.75 2.75 0 013 18.25V5.75z" /></svg>
+              </span>
+              <div>
+                <div className="font-semibold text-lg">Call Us</div>
+                <div className="text-gray-300">+91-8511734001</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-4 mb-4">
+              <span className="mt-1 text-yellow-400">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16 12H8m8 0a4 4 0 11-8 0 4 4 0 018 0zm0 0v1a4 4 0 01-8 0v-1" /></svg>
+              </span>
+              <div>
+                <div className="font-semibold text-lg">Email</div>
+                <div className="text-gray-300">rajcallbrite@gmail.com</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-4 mb-4">
+              <span className="mt-1 text-yellow-400">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657A8 8 0 116.343 5.343a8 8 0 0111.314 11.314z" /></svg>
+              </span>
+              <div>
+                <div className="font-semibold text-lg">Location</div>
+                <div className="text-gray-300">Jaipur, Rajasthan, India</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <span className="mt-1 text-yellow-400">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8 17v.01M8 13v.01M8 9v.01M16 17v.01M16 13v.01M16 9v.01M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2z" /></svg>
+              </span>
+              <div>
+                <div className="font-semibold text-lg">Contact Time</div>
+                <div className="text-gray-300">Morning 9am to 5pm</div>
+              </div>
+            </div>
+          </div>
+          {/* Right: Contact Form */}
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6 justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-light mb-2">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-yellow-400 text-white placeholder-gray-400 py-2 px-0 outline-none"
+                  placeholder="Enter your Name"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-light mb-2">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-yellow-400 text-white placeholder-gray-400 py-2 px-0 outline-none"
+                  placeholder="Enter a valid email address"
+                  required
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="address" className="block text-sm font-light mb-2">Address</label>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                value={formData.address}
+                onChange={handleInputChange}
+                className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-yellow-400 text-white placeholder-gray-400 py-2 px-0 outline-none"
+                placeholder="Enter your address"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="message" className="block text-sm font-light mb-2">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows={3}
+                value={formData.message}
+                onChange={handleInputChange}
+                className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-yellow-400 text-white placeholder-gray-400 py-2 px-0 outline-none resize-none"
+                placeholder="Enter your message"
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="w-full py-3 mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-bold rounded-full text-lg tracking-wide transition-colors duration-300 shadow-lg"
+              disabled={status === 'loading'}
+            >
+              {status === 'loading' ? 'SENDING...' : 'SUBMIT'}
+            </button>
+            {status !== 'idle' && (
+              <div className={`text-center mt-2 text-sm ${status === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+                {statusMsg}
+              </div>
+            )}
+          </form>
+        </div>
         {/* Social Links Row */}
-        <div className="flex gap-6 mt-8 justify-center">
+        <div className="flex gap-6 mt-12 justify-center">
           <a
             href="https://www.instagram.com/raj._jain_007/"
             target="_blank"
