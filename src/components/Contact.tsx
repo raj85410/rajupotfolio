@@ -7,6 +7,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    subject: '',
     message: ''
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>("idle");
@@ -24,19 +25,19 @@ const Contact = () => {
     setStatus('loading');
     setStatusMsg('Sending...');
     try {
-      const res = await fetch('http://localhost:5000/api/contact', {
+      // TODO: Replace with your Formspree endpoint
+      const res = await fetch('https://formspree.io/f/yourformid', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-      const data = await res.json();
       if (res.ok) {
         setStatus('success');
         setStatusMsg('Message sent successfully!');
-        setFormData({ name: '', email: '', message: '' });
+        setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
         setStatus('error');
-        setStatusMsg(data.error || 'Failed to send message.');
+        setStatusMsg('Failed to send message.');
       }
     } catch (err) {
       setStatus('error');
@@ -57,38 +58,97 @@ const Contact = () => {
 
   return (
     <section id="contact" className="min-h-screen bg-gray-50 dark:bg-slate-800 py-24">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="text-center mb-20">
+      <div className="max-w-2xl mx-auto px-8">
+        <div className="text-center mb-12">
           <h2 className="text-6xl md:text-7xl font-black text-gray-900 dark:text-white mb-8 tracking-[0.1em]">
             CONTACT
           </h2>
-          <div className="w-24 h-px bg-orange-500 mx-auto mb-12"></div>
+          <div className="w-24 h-px bg-orange-500 mx-auto mb-8"></div>
           <p className="text-lg font-light text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
             Ready to discuss your next project? Let's connect and build something amazing together.
           </p>
         </div>
-        <div className="flex justify-center">
-          <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLSfMJpzNlJU1BjRcfbpjhyT5B3vWlIWgg4Xe9HA8yMbpek3FOA/viewform?embedded=true"
-            width={"100%" as any}
-            height={800}
-            frameBorder={0}
-            marginHeight={0}
-            marginWidth={0}
-            title="Contact Form"
-            className="bg-white dark:bg-slate-900 rounded-lg shadow-lg"
-            allowFullScreen
-          >
-            Loading…
-          </iframe>
+        {/* Contact Info */}
+        <div className="mb-8 flex flex-col items-center gap-2">
+          <div className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+            <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5.75A2.75 2.75 0 015.75 3h12.5A2.75 2.75 0 0121 5.75v12.5A2.75 2.75 0 0118.25 21H5.75A2.75 2.75 0 013 18.25V5.75z" /></svg>
+            <span>+91-8511734001</span>
+          </div>
+          <div className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+            <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16 12H8m8 0a4 4 0 11-8 0 4 4 0 018 0zm0 0v1a4 4 0 01-8 0v-1" /></svg>
+            <span>rajcallbrite@gmail.com</span>
+          </div>
         </div>
+        {/* Contact Form */}
+        <form onSubmit={handleSubmit} className="space-y-6 bg-white dark:bg-slate-900 p-8 rounded-lg shadow-lg">
+          <div>
+            <label htmlFor="name" className="block text-sm font-light text-gray-700 dark:text-gray-300 mb-2">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-transparent text-gray-900 dark:text-white focus:border-orange-500 focus:ring-0 transition-colors outline-none font-light rounded"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="email" className="block text-sm font-light text-gray-700 dark:text-gray-300 mb-2">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-transparent text-gray-900 dark:text-white focus:border-orange-500 focus:ring-0 transition-colors outline-none font-light rounded"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="subject" className="block text-sm font-light text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              value={formData.subject}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-transparent text-gray-900 dark:text-white focus:border-orange-500 focus:ring-0 transition-colors outline-none font-light rounded"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="message" className="block text-sm font-light text-gray-700 dark:text-gray-300 mb-2">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows={5}
+              value={formData.message}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 bg-transparent text-gray-900 dark:text-white focus:border-orange-500 focus:ring-0 transition-colors outline-none font-light rounded resize-none"
+              required
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            className="w-full px-8 py-4 border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-500 font-light tracking-[0.15em] text-sm flex items-center justify-center space-x-3 rounded"
+            disabled={status === 'loading'}
+          >
+            <span>{status === 'loading' ? 'SENDING...' : 'SEND MESSAGE'}</span>
+          </button>
+          {status !== 'idle' && (
+            <div className={`text-center mt-2 text-sm ${status === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+              {statusMsg}
+            </div>
+          )}
+        </form>
         {/* Social Links Row */}
         <div className="flex gap-6 mt-8 justify-center">
           <a
             href="https://www.instagram.com/raj._jain_007/"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-4 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors duration-300 flex items-center justify-center"
+            className="p-4 bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 text-white rounded-full shadow-lg hover:scale-110 transition-transform duration-300 flex items-center justify-center"
             aria-label="Instagram"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -100,7 +160,7 @@ const Contact = () => {
             href="https://www.linkedin.com/in/raju-jain-0a5466280/"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-4 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors duration-300 flex items-center justify-center"
+            className="p-4 bg-blue-700 text-white rounded-full shadow-lg hover:scale-110 transition-transform duration-300 flex items-center justify-center"
             aria-label="LinkedIn"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -112,7 +172,7 @@ const Contact = () => {
             href="https://discord.com/channels/1098529566093484112/1098529566093484114"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-4 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors duration-300 flex items-center justify-center"
+            className="p-4 bg-indigo-600 text-white rounded-full shadow-lg hover:scale-110 transition-transform duration-300 flex items-center justify-center"
             aria-label="Discord"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -124,7 +184,7 @@ const Contact = () => {
             href="https://github.com/raj85410"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-4 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors duration-300 flex items-center justify-center"
+            className="p-4 bg-gray-900 text-white rounded-full shadow-lg hover:scale-110 transition-transform duration-300 flex items-center justify-center"
             aria-label="GitHub"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
