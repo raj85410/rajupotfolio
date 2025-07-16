@@ -3,7 +3,7 @@ import React from 'react';
 const About = () => {
   const skills = [
     'Python', 'Django', 'Flask', 'Streamlit',
-    'Docker', 'Kubernetes', 'Jenkins', 'AWS',
+    'Docker', 'Kubernetes', 'Jenkins', 'AWS',0
     'PostgreSQL', 'MongoDB', 'Redis', 'Git',
     'Linux', 'Terraform', 'Ansible', 'Grafana'
   ];

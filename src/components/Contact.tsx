@@ -7,7 +7,6 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    address: '',
     message: ''
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>("idle");
@@ -34,7 +33,7 @@ const Contact = () => {
       if (res.ok) {
         setStatus('success');
         setStatusMsg('Message sent successfully!');
-        setFormData({ name: '', email: '', address: '', message: '' });
+        setFormData({ name: '', email: '', message: '' });
       } else {
         setStatus('error');
         setStatusMsg('Failed to send message.');
@@ -46,49 +45,52 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="min-h-screen bg-black bg-opacity-80 py-24 text-white" style={{backgroundImage: 'url(/asset/image22222.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
+    <section id="contact" className="min-h-screen py-24 bg-gray-50 dark:bg-slate-800 text-gray-900 dark:text-white">
       <div className="max-w-5xl mx-auto px-4 md:px-8">
-        <div className="grid md:grid-cols-2 gap-12 bg-black bg-opacity-70 rounded-lg shadow-lg p-8">
+        <div className="grid md:grid-cols-2 gap-12 rounded-lg shadow-lg p-8 bg-white dark:bg-slate-900">
           {/* Left: Contact Info */}
           <div className="flex flex-col gap-10 justify-center">
             <div>
               <h2 className="text-4xl font-bold mb-6 tracking-wide">CONTACT US</h2>
-              <p className="text-xs text-gray-400 mb-8">Images from Freepik</p>
             </div>
             <div className="flex items-start gap-4 mb-4">
-              <span className="mt-1 text-yellow-400">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5.75A2.75 2.75 0 015.75 3h12.5A2.75 2.75 0 0121 5.75v12.5A2.75 2.75 0 0118.25 21H5.75A2.75 2.75 0 013 18.25V5.75z" /></svg>
+              <span className="mt-1 text-orange-500">
+                {/* Phone icon */}
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M2 6.5C2 5.12 3.12 4 4.5 4h2A2.5 2.5 0 019 6.5v1A2.5 2.5 0 016.5 10h-2A2.5 2.5 0 012 7.5v-1zM22 17.5c0 1.38-1.12 2.5-2.5 2.5h-2A2.5 2.5 0 0115 17.5v-1A2.5 2.5 0 0117.5 14h2a2.5 2.5 0 012.5 2.5v1z" /></svg>
               </span>
               <div>
                 <div className="font-semibold text-lg">Call Us</div>
-                <div className="text-gray-300">+91-8511734001</div>
+                <div className="text-gray-500 dark:text-gray-300">+91-8511734001</div>
               </div>
             </div>
             <div className="flex items-start gap-4 mb-4">
-              <span className="mt-1 text-yellow-400">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16 12H8m8 0a4 4 0 11-8 0 4 4 0 018 0zm0 0v1a4 4 0 01-8 0v-1" /></svg>
+              <span className="mt-1 text-orange-500">
+                {/* Email icon */}
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-18 8V8a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" /></svg>
               </span>
               <div>
                 <div className="font-semibold text-lg">Email</div>
-                <div className="text-gray-300">rajcallbrite@gmail.com</div>
+                <div className="text-gray-500 dark:text-gray-300">rajcallbrite@gmail.com</div>
               </div>
             </div>
             <div className="flex items-start gap-4 mb-4">
-              <span className="mt-1 text-yellow-400">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657A8 8 0 116.343 5.343a8 8 0 0111.314 11.314z" /></svg>
+              <span className="mt-1 text-orange-500">
+                {/* Location icon */}
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 21c-4.418 0-8-4.03-8-9a8 8 0 1116 0c0 4.97-3.582 9-8 9z" /><circle cx="12" cy="12" r="3" /></svg>
               </span>
               <div>
                 <div className="font-semibold text-lg">Location</div>
-                <div className="text-gray-300">Jaipur, Rajasthan, India</div>
+                <div className="text-gray-500 dark:text-gray-300">Jaipur, Rajasthan, India</div>
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <span className="mt-1 text-yellow-400">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8 17v.01M8 13v.01M8 9v.01M16 17v.01M16 13v.01M16 9v.01M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2z" /></svg>
+              <span className="mt-1 text-orange-500">
+                {/* Clock icon */}
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2" /></svg>
               </span>
               <div>
                 <div className="font-semibold text-lg">Contact Time</div>
-                <div className="text-gray-300">Morning 9am to 5pm</div>
+                <div className="text-gray-500 dark:text-gray-300">Morning 9am to 5pm</div>
               </div>
             </div>
           </div>
@@ -103,7 +105,7 @@ const Contact = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-yellow-400 text-white placeholder-gray-400 py-2 px-0 outline-none"
+                  className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-orange-500 text-gray-900 dark:text-white placeholder-gray-400 py-2 px-0 outline-none"
                   placeholder="Enter your Name"
                   required
                 />
@@ -116,24 +118,11 @@ const Contact = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-yellow-400 text-white placeholder-gray-400 py-2 px-0 outline-none"
+                  className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-orange-500 text-gray-900 dark:text-white placeholder-gray-400 py-2 px-0 outline-none"
                   placeholder="Enter a valid email address"
                   required
                 />
               </div>
-            </div>
-            <div>
-              <label htmlFor="address" className="block text-sm font-light mb-2">Address</label>
-              <input
-                type="text"
-                id="address"
-                name="address"
-                value={formData.address}
-                onChange={handleInputChange}
-                className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-yellow-400 text-white placeholder-gray-400 py-2 px-0 outline-none"
-                placeholder="Enter your address"
-                required
-              />
             </div>
             <div>
               <label htmlFor="message" className="block text-sm font-light mb-2">Message</label>
@@ -143,14 +132,14 @@ const Contact = () => {
                 rows={3}
                 value={formData.message}
                 onChange={handleInputChange}
-                className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-yellow-400 text-white placeholder-gray-400 py-2 px-0 outline-none resize-none"
+                className="w-full bg-transparent border-0 border-b border-gray-400 focus:border-orange-500 text-gray-900 dark:text-white placeholder-gray-400 py-2 px-0 outline-none resize-none"
                 placeholder="Enter your message"
                 required
               ></textarea>
             </div>
             <button
               type="submit"
-              className="w-full py-3 mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-bold rounded-full text-lg tracking-wide transition-colors duration-300 shadow-lg"
+              className="w-full py-3 mt-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full text-lg tracking-wide transition-colors duration-300 shadow-lg"
               disabled={status === 'loading'}
             >
               {status === 'loading' ? 'SENDING...' : 'SUBMIT'}
