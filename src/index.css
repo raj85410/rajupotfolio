@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom 3D Effects */
+@layer utilities {
+  .shadow-3xl {
+    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .perspective-3d {
+    perspective: 1000px;
+  }
+  
+  .rotate-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Dynamic role badges animation */
+  .role-badge {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .role-badge:nth-child(1) {
+    animation-delay: 0s;
+  }
+  
+  .role-badge:nth-child(3) {
+    animation-delay: 1s;
+  }
+  
+  .role-badge:nth-child(5) {
+    animation-delay: 2s;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) scale(1);
+    }
+    50% {
+      transform: translateY(-10px) scale(1.05);
+    }
+  }
+  
+  /* Glowing text effect */
+  .glow-text {
+    text-shadow: 0 0 10px currentColor;
+  }
+  
+  /* Typewriter effect */
+  .typewriter {
+    overflow: hidden;
+    border-right: 2px solid;
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+  
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: currentColor; }
+  }
+  
+  /* Modal animations */
+  .modal-enter {
+    animation: modalSlideIn 0.4s ease-out;
+  }
+  
+  .modal-exit {
+    animation: modalSlideOut 0.3s ease-in;
+  }
+  
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8) translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+  
+  @keyframes modalSlideOut {
+    from {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.8) translateY(-20px);
+    }
+  }
+  
+  /* Floating animation for skill cards */
+  .skill-card-float {
+    animation: skillFloat 3s ease-in-out infinite;
+  }
+  
+  @keyframes skillFloat {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  
+  /* Glow effect for active skills */
+  .skill-glow {
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+  }
+  
+  /* Bounce animation for examples */
+  .example-bounce {
+    animation: exampleBounce 0.6s ease-out;
+  }
+  
+  @keyframes exampleBounce {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
