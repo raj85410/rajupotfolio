@@ -20,24 +20,32 @@ const Contact = () => {
     e.preventDefault();
     setStatus('loading');
     setStatusMsg('Sending...');
+    
     try {
-      // TODO: Replace with your Formspree endpoint
-      const res = await fetch('http://localhost:5000/api/contact', {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbwo692EIjVosaPfqyzChIjriNcZqB9ew4GsiZO2VA-klQa0JCF2xFHC4rkKr_uT2ae_Ew/exec', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        mode: 'no-cors', // This is important for Google Apps Script
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
+        }),
       });
-      if (res.ok) {
-        setStatus('success');
-        setStatusMsg('Message sent successfully!');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        setStatus('error');
-        setStatusMsg('Failed to send message.');
-      }
-    } catch {
+
+      // With no-cors mode, we can't check response.ok, so we assume success
+      setStatus('success');
+      setStatusMsg('Message sent successfully!');
+      setFormData({ name: '', email: '', message: '' });
+      alert('Message sent successfully!');
+      
+    } catch (error) {
+      console.error('Error sending message:', error);
       setStatus('error');
-      setStatusMsg('Failed to send message.');
+      setStatusMsg('Error sending message');
+      alert('Error sending message');
     }
   };
 
