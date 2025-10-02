@@ -17,11 +17,11 @@ const Projects = () => {
     {
       id: 2,
       title: "Assistnez",
-      tech: ["Outsourcing", "Virtual Assistance", "Web App", "Netlify"],
+      tech: ["Outsourcing", "Virtual Assistance", "Web App", "Netlify", "Hostinger", "App Script"],
       description: "Client website for outsourcing work and getting virtual assistance services.",
       image: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800",
       category: "Web Development",
-      link: "https://assistnez.netlify.app/"
+      link: "http://www.assistnez.com"
     },
     {
       id: 3,
